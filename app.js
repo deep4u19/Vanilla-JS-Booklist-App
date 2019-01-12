@@ -10,8 +10,6 @@ class Book{
 
 
 
-
-
 // UI class : Handles UI Tasks
 
 class UI{
@@ -20,7 +18,7 @@ class UI{
         books.forEach((book)=>UI.addBookToList(book));
     }
 
-    // Shows books to UI
+// Shows books to UI
     static addBookToList(book){
         const list=document.getElementById('book-list');
         const row=document.createElement('tr');
@@ -33,7 +31,7 @@ class UI{
         list.appendChild(row);
     }
 
-    // Deletes Book
+// Deletes Book
 
     static deleteBook(el){
         if(el.classList.contains('delete')){
@@ -42,7 +40,7 @@ class UI{
         };
     } 
 
-    //Shows alert
+//Shows alert
     
     static showAlert(message, alertClass){
         let div=document.createElement('div');
@@ -52,7 +50,7 @@ class UI{
         let form=document.getElementById('book-form');
         container.insertBefore(div,form);
 
-        // Removes after 3 seconds
+// Removes after 3 seconds
         setTimeout(()=>{
             document.querySelector('.alert').remove();
         },3000);
@@ -61,7 +59,7 @@ class UI{
 
 
 
-    // Clears inputs after each submission
+// Clears inputs after each submission
     static clearField(){
         document.getElementById('title').value='';
         document.getElementById('author').value='';
@@ -69,9 +67,6 @@ class UI{
     }
 
 }
-
-
-
 
 
 
@@ -106,19 +101,6 @@ class Store{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Event : Displays Book
 
 document.addEventListener('DOMContentLoaded',UI.displayBooks);
@@ -128,7 +110,7 @@ document.addEventListener('DOMContentLoaded',UI.displayBooks);
 
 const bookForm=document.getElementById('book-form');
 
-    // Handling form submit
+// Handling form submit
     bookForm.addEventListener('submit',(e)=>{
         e.preventDefault();
     
@@ -137,13 +119,13 @@ const bookForm=document.getElementById('book-form');
         const isbn=document.getElementById('isbn').value;
 
 
-    // Form validation
+// Form validation
 
         if(title===''||author===''||isbn===''){
             UI.showAlert('Please fill every field','danger');
         }else{
 
-        //  Book instance with form values
+//  Book instance with form values
                 const book=new Book(title,author,isbn);
                 console.log(book);
                 UI.addBookToList(book);
@@ -164,7 +146,7 @@ const bookForm=document.getElementById('book-form');
         // Delete from UI
         UI.deleteBook(e.target);
 
-        // Delete from localstorage
+// Delete from localstorage
         Store.deleteBook(
             e.target.parentElement.previousElementSibling.textContent);
         UI.showAlert('Book deleted','success')
